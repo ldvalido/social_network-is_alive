@@ -3,8 +3,23 @@ services:
   web:
     build: .
     ports:
-     - "5000:5000"
+     - "8080:8080"
     volumes:
      - .:/code
+    networks:
+      - social_network
   redis:
     image: "redis:alpine"
+    networks:
+      - social_network
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis_data:/data
+
+networks:
+  social_network:
+    driver: bridge
+volumes:
+  redis_data:
